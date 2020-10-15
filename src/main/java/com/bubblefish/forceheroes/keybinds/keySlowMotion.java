@@ -1,5 +1,6 @@
 package com.bubblefish.forceheroes.keybinds;
 
+import com.bubblefish.forceheroes.ClientForceHeroes;
 import com.bubblefish.forceheroes.ForceHeroes;
 
 public class keySlowMotion {

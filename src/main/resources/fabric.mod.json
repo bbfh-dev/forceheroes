@@ -20,6 +20,9 @@
   "entrypoints": {
     "main": [
       "com.bubblefish.forceheroes.ForceHeroes"
+    ],
+    "client": [
+      "com.bubblefish.forceheroes.ClientForceHeroes"
     ]
   },
   "mixins": [

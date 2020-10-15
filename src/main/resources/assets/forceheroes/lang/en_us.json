@@ -1,0 +1,10 @@
+{
+  "itemGroup.forceheroes.group": "ForceHeroes",
+  "item.forceheroes.the_flash_helmet": "The Flash Helmet",
+  "item.forceheroes.the_flash_chestplate": "The Flash Chestplate",
+  "item.forceheroes.the_flash_leggings": "The Flash Leggings",
+  "item.forceheroes.the_flash_boots": "The Flash Boots",
+  "category.forceheroes.controls": "ForceHeroes",
+  "gui.forceheroes.inventory.speed": "Speed",
+  "gui.forceheroes.inventory.slowmo": "Slow Motion"
+}

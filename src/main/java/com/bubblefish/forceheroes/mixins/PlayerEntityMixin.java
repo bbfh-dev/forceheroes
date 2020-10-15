@@ -1,6 +1,7 @@
 package com.bubblefish.forceheroes.mixins;
 
 import com.bubblefish.forceheroes.common.extensions.TpsManager;
+import com.bubblefish.forceheroes.common.mixins.SliderVars;
 import com.bubblefish.forceheroes.item.TheFlashArmor;
 import com.bubblefish.forceheroes.keybinds.keySlowMotion;
 import com.bubblefish.forceheroes.keybinds.keySpeedForce;
@@ -39,7 +40,7 @@ public abstract class PlayerEntityMixin extends LivingEntity {
             ItemStack equippedBoots = this.getEquippedStack(EquipmentSlot.FEET);
             if (equippedHelmet.getItem() == TheFlashArmor.THE_FLASH_HELMET && equippedChestplate.getItem() == TheFlashArmor.THE_FLASH_CHESTPLATE && equippedLeggings.getItem() == TheFlashArmor.THE_FLASH_LEGGINGS && equippedBoots.getItem() == TheFlashArmor.THE_FLASH_BOOTS) {
                 if (keySpeedForce.speedForce) {
-                    this.addStatusEffect(new StatusEffectInstance(StatusEffects.SPEED, 1, 512, false, false, false));
+                    this.addStatusEffect(new StatusEffectInstance(StatusEffects.SPEED, 1, (int) ((SliderVars.varA * 10 + 1) * 45), false, false, false));
                     this.addStatusEffect(new StatusEffectInstance(StatusEffects.DOLPHINS_GRACE, 1, 1, false, false, false));
                     IncreaseStepHeight.autoJumpState = 0;
                 } else {
@@ -47,7 +48,7 @@ public abstract class PlayerEntityMixin extends LivingEntity {
                 }
 
                 if (keySlowMotion.slowMotion) {
-                    TpsManager.changeTps(5F);
+                    TpsManager.changeTps((float) (20 - ((SliderVars.varB * 10 + 1) * 1.7F)));
                 } else {
                     TpsManager.changeTps(20F);
                 }

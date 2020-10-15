@@ -1,6 +1,9 @@
 package com.bubblefish.forceheroes.mixins;
 
 import com.bubblefish.forceheroes.ForceHeroes;
+import com.bubblefish.forceheroes.common.mixins.InventoryScreenSliderA;
+import com.bubblefish.forceheroes.common.mixins.InventoryScreenSliderB;
+import com.bubblefish.forceheroes.common.mixins.SliderVars;
 import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.client.gui.screen.ingame.AbstractInventoryScreen;
 import net.minecraft.client.gui.screen.ingame.InventoryScreen;
@@ -19,6 +22,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 @Mixin(InventoryScreen.class)
 public abstract class InventoryScreenMixin extends AbstractInventoryScreen<PlayerScreenHandler> implements RecipeBookProvider {
     private static final Identifier BACKGROUND_ABILITY = new Identifier(ForceHeroes.MOD_ID, "textures/gui/inventory.png");
+//    private static final InventoryScreenSlider inventoryScreenSlider = new InventoryScreenSlider(0, 0, 120, 20, Text.of(""), 10.0F);
     public InventoryScreenMixin(PlayerScreenHandler screenHandler, PlayerInventory playerInventory, Text text) {
         super(screenHandler, playerInventory, text);
     }
@@ -39,8 +43,11 @@ public abstract class InventoryScreenMixin extends AbstractInventoryScreen<Playe
         this.textRenderer.draw(matrices, new TranslatableText("gui.forceheroes.inventory.slowmo"), (float)this.titleX + 86.0F, (float)this.titleY + 34, 4210752);
     }
 
-    @Inject(at = @At("TAIL"), method = "render")
-    private void render(MatrixStack matrices, int mouseX, int mouseY, float delta, CallbackInfo info) {
 
+    @Inject(method = "init", at = @At("TAIL"))
+    void init(CallbackInfo info) {
+        this.addButton(new InventoryScreenSliderA(this.x + 183, this.y + 12, 110, 20, Text.of(""), SliderVars.varA));
+        this.addButton(new InventoryScreenSliderB(this.x + 183, this.y + 46, 110, 20, Text.of(""), SliderVars.varB));
     }
+
 }

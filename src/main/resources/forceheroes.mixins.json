@@ -5,11 +5,11 @@
   "compatibilityLevel": "JAVA_8",
   "mixins": [
     "InventoryScreenMixin",
-    "MinecraftClientMixin",
-    "PlayerEntityMixin",
-    "RenderTickCounterMixin"
+    "PlayerEntityMixin"
   ],
   "client": [
+    "MinecraftClientMixin",
+    "RenderTickCounterMixin"
   ],
   "injectors": {
     "defaultRequire": 1
