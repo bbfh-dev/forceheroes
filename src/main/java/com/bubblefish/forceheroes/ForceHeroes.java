@@ -17,8 +17,6 @@ public class ForceHeroes implements ModInitializer {
     public static final String MOD_ID = "forceheroes"; //Creating main project MOD_ID constant
     public static final ItemGroup GROUP = FabricItemGroupBuilder.build(new Identifier(MOD_ID, "group"),
             () -> new ItemStack(TheFlashArmor.THE_FLASH_CHESTPLATE)); //Creating main item group
-    public static final KeyBinding keySlowMotion = KeyBindingHelper.registerKeyBinding(new KeyBinding("key.forceheroes.slowMotion", InputUtil.Type.KEYSYM, GLFW.GLFW_KEY_Y, "category.forceheroes.controls")); //Registering new Keybinding for slowmo mode
-    public static final KeyBinding keySpeedForce = KeyBindingHelper.registerKeyBinding(new KeyBinding("key.forceheroes.speedForce", InputUtil.Type.KEYSYM, GLFW.GLFW_KEY_H, "category.forceheroes.controls")); //Registering new Keybinding for speed force mode
 
     @Override
     public void onInitialize() {
