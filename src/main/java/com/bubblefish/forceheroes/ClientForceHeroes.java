@@ -1,6 +1,9 @@
 package com.bubblefish.forceheroes;
 
+import com.bubblefish.forceheroes.common.extensions.ClientUpdateKeys;
+import com.bubblefish.forceheroes.common.extensions.IncreaseStepHeight;
 import net.fabricmc.api.ClientModInitializer;
+import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper;
 import net.fabricmc.fabric.api.network.ClientSidePacketRegistry;
 import net.minecraft.client.options.KeyBinding;
@@ -13,5 +16,9 @@ public class ClientForceHeroes implements ClientModInitializer {
 
     @Override
     public void onInitializeClient() {
+        IncreaseStepHeight increaseStepHeight = new IncreaseStepHeight(); //Increase Step Height when player has speed force
+        ClientTickEvents.END_CLIENT_TICK.register(increaseStepHeight); //Increase Step Height when player has speed force
+
+        ClientTickEvents.END_CLIENT_TICK.register(new ClientUpdateKeys());
     }
 }
