@@ -20,7 +20,7 @@ public class ClientUpdateKeys implements ClientTickEvents.EndTick {
     @Override
     @Environment(EnvType.CLIENT)
     public void onEndTick(MinecraftClient minecraftClient) {
-        if (MinecraftClient.getInstance().getNetworkHandler() == null) {
+        if (minecraftClient.getNetworkHandler() == null) {
             //we're not connected to any server. Reset the keys and do nothing
             slowMotion = false;
             speedForce = false;
@@ -32,16 +32,21 @@ public class ClientUpdateKeys implements ClientTickEvents.EndTick {
         if (ClientForceHeroes.keySlowMotion.wasPressed()) {
             hasUpdated = true;
             slowMotion = !slowMotion;
-        }
-        if (ClientForceHeroes.keySpeedForce.wasPressed()) {
-            hasUpdated = true;
-            speedForce = !speedForce;
 
             if (speedForce) {
                 ClientTpsManager.changeTps((float) (20 - ((SliderVars.varB * 10 + 1) * 1.7F)));
             } else {
                 ClientTpsManager.changeTps(20F);
             }
+        }
+        if (ClientForceHeroes.keySpeedForce.wasPressed()) {
+            hasUpdated = true;
+            speedForce = !speedForce;
+        }
+        if (SliderVars.aEdited || SliderVars.bEdited) {
+            SliderVars.aEdited = false;
+            SliderVars.bEdited = false;
+            hasUpdated = true;
         }
 
         if (hasUpdated) {
@@ -52,7 +57,7 @@ public class ClientUpdateKeys implements ClientTickEvents.EndTick {
     @Environment(EnvType.CLIENT)
     public static void sendKeys() {
         try {
-            KeyUpdatePacket packet = new KeyUpdatePacket(slowMotion, speedForce);
+            KeyUpdatePacket packet = new KeyUpdatePacket(slowMotion, speedForce, SliderVars.varA, SliderVars.varB);
             PacketByteBuf buf = new PacketByteBuf(Unpooled.buffer());
             packet.write(buf);
             ClientSidePacketRegistry.INSTANCE.sendToServer(ForceHeroes.KEY_UPDATE_PACKET_ID, buf);
