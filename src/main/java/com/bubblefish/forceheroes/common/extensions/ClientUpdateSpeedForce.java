@@ -2,7 +2,7 @@ package com.bubblefish.forceheroes.common.extensions;
 
 import com.bubblefish.forceheroes.ClientForceHeroes;
 import com.bubblefish.forceheroes.ForceHeroes;
-import com.bubblefish.forceheroes.common.mixins.KeyTracker;
+import com.bubblefish.forceheroes.common.mixins.SpeedforceTracker;
 import com.bubblefish.forceheroes.common.mixins.SliderVars;
 import io.netty.buffer.Unpooled;
 import net.fabricmc.api.EnvType;
@@ -14,7 +14,7 @@ import net.minecraft.network.PacketByteBuf;
 
 import java.io.IOException;
 
-public class ClientUpdateKeys implements ClientTickEvents.EndTick {
+public class ClientUpdateSpeedForce implements ClientTickEvents.EndTick {
     public static boolean slowMotion = false;
     public static boolean speedForce = false;
 
@@ -55,22 +55,22 @@ public class ClientUpdateKeys implements ClientTickEvents.EndTick {
         }
 
         //make sure the local player entity has the right values synced.
-        if (minecraftClient.player instanceof KeyTracker) {
-            KeyTracker keyTracker = (KeyTracker)minecraftClient.player;
-            keyTracker.setSlowMotion(slowMotion);
-            keyTracker.setSpeedForce(speedForce);
-            keyTracker.setSpeedAmount(SliderVars.varA);
-            keyTracker.setSlowmoAmount(SliderVars.varB);
+        if (minecraftClient.player instanceof SpeedforceTracker) {
+            SpeedforceTracker speedforceTracker = (SpeedforceTracker)minecraftClient.player;
+            speedforceTracker.setSlowMotion(slowMotion);
+            speedforceTracker.setSpeedForce(speedForce);
+            speedforceTracker.setSpeedAmount(SliderVars.varA);
+            speedforceTracker.setSlowmoAmount(SliderVars.varB);
         }
     }
 
     @Environment(EnvType.CLIENT)
     public static void sendKeys() {
         try {
-            KeyUpdatePacket packet = new KeyUpdatePacket(slowMotion, speedForce, SliderVars.varA, SliderVars.varB);
+            SpeedforceUpdatePacket packet = new SpeedforceUpdatePacket(slowMotion, speedForce, SliderVars.varA, SliderVars.varB);
             PacketByteBuf buf = new PacketByteBuf(Unpooled.buffer());
             packet.write(buf);
-            ClientSidePacketRegistry.INSTANCE.sendToServer(ForceHeroes.KEY_UPDATE_PACKET_ID, buf);
+            ClientSidePacketRegistry.INSTANCE.sendToServer(ForceHeroes.SPEEDFORCE_UPDATE_PACKET_ID, buf);
         } catch (IOException e) {
             System.out.println("error whilst sending packet");
             e.printStackTrace();

@@ -1,8 +1,6 @@
 package com.bubblefish.forceheroes.mixins;
 
-import com.bubblefish.forceheroes.common.extensions.ClientTpsManager;
-import com.bubblefish.forceheroes.common.mixins.KeyTracker;
-import com.bubblefish.forceheroes.common.mixins.SliderVars;
+import com.bubblefish.forceheroes.common.mixins.SpeedforceTracker;
 import com.bubblefish.forceheroes.item.TheFlashArmor;
 import com.bubblefish.forceheroes.common.extensions.IncreaseStepHeight;
 import net.minecraft.entity.player.PlayerEntity;
@@ -20,7 +18,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(PlayerEntity.class)
-public abstract class PlayerEntityMixin extends LivingEntity implements KeyTracker {
+public abstract class PlayerEntityMixin extends LivingEntity implements SpeedforceTracker {
     @Unique
     private boolean slowMotion = false;
     @Unique

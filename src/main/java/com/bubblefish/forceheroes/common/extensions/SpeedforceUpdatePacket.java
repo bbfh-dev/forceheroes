@@ -1,27 +1,26 @@
 package com.bubblefish.forceheroes.common.extensions;
 
-import com.bubblefish.forceheroes.common.mixins.KeyTracker;
-import net.fabricmc.fabric.api.network.PacketConsumer;
+import com.bubblefish.forceheroes.common.mixins.SpeedforceTracker;
 import net.fabricmc.fabric.api.network.PacketContext;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.network.PacketByteBuf;
 
 import java.io.IOException;
 
-public class KeyUpdatePacket {
+public class SpeedforceUpdatePacket {
     private boolean slowMotion;
     private boolean speedForce;
     private double speedAmount;
     private double slowmoAmount;
 
-    public KeyUpdatePacket(boolean slowMotion, boolean speedForce, double speedAmount, double slowmoAmount) {
+    public SpeedforceUpdatePacket(boolean slowMotion, boolean speedForce, double speedAmount, double slowmoAmount) {
         this.slowMotion = slowMotion;
         this.speedForce = speedForce;
         this.speedAmount = speedAmount;
         this.slowmoAmount = slowmoAmount;
     }
 
-    public KeyUpdatePacket() {
+    public SpeedforceUpdatePacket() {
 
     }
 
@@ -41,16 +40,16 @@ public class KeyUpdatePacket {
 
     public static void onRecieve(PacketContext packetContext, PacketByteBuf packetByteBuf) {
         try {
-            KeyUpdatePacket packet = new KeyUpdatePacket();
+            SpeedforceUpdatePacket packet = new SpeedforceUpdatePacket();
             packet.read(packetByteBuf);
 
             PlayerEntity player = packetContext.getPlayer();
-            if (player instanceof KeyTracker) {
-                KeyTracker keyTracker = (KeyTracker)player;
-                keyTracker.setSlowMotion(packet.slowMotion);
-                keyTracker.setSpeedForce(packet.speedForce);
-                keyTracker.setSpeedAmount(packet.speedAmount);
-                keyTracker.setSlowmoAmount(packet.slowmoAmount);
+            if (player instanceof SpeedforceTracker) {
+                SpeedforceTracker speedforceTracker = (SpeedforceTracker)player;
+                speedforceTracker.setSlowMotion(packet.slowMotion);
+                speedforceTracker.setSpeedForce(packet.speedForce);
+                speedforceTracker.setSpeedAmount(packet.speedAmount);
+                speedforceTracker.setSlowmoAmount(packet.slowmoAmount);
             } else {
                 System.out.println("[ForceHeroes] Impossible situation. Player isn't implementing KeyTracker. The Mixin might not have applied or this entity isn't of type ServerPlayerEntity");
             }

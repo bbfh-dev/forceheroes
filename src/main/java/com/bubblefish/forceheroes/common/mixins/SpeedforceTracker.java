@@ -1,6 +1,6 @@
 package com.bubblefish.forceheroes.common.mixins;
 
-public interface KeyTracker {
+public interface SpeedforceTracker {
     void setSlowMotion(boolean v);
 
     void setSpeedForce(boolean v);
