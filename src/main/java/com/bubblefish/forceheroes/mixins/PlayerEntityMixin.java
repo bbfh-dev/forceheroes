@@ -20,7 +20,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 @Mixin(PlayerEntity.class)
 public abstract class PlayerEntityMixin extends LivingEntity implements SpeedforceTracker {
     @Unique
-    private boolean slowMotion = false;
+    private boolean slowMotion = false;  //slow motion is currently only implemented for the clientside animations.
     @Unique
     private boolean speedForce = false;
     @Unique
