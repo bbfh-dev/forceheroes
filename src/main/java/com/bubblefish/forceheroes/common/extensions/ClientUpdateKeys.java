@@ -2,6 +2,7 @@ package com.bubblefish.forceheroes.common.extensions;
 
 import com.bubblefish.forceheroes.ClientForceHeroes;
 import com.bubblefish.forceheroes.ForceHeroes;
+import com.bubblefish.forceheroes.common.mixins.KeyTracker;
 import com.bubblefish.forceheroes.common.mixins.SliderVars;
 import io.netty.buffer.Unpooled;
 import net.fabricmc.api.EnvType;
@@ -51,6 +52,15 @@ public class ClientUpdateKeys implements ClientTickEvents.EndTick {
 
         if (hasUpdated) {
             sendKeys();
+        }
+
+        //make sure the local player entity has the right values synced.
+        if (minecraftClient.player instanceof KeyTracker) {
+            KeyTracker keyTracker = (KeyTracker)minecraftClient.player;
+            keyTracker.setSlowMotion(slowMotion);
+            keyTracker.setSpeedForce(speedForce);
+            keyTracker.setSpeedAmount(SliderVars.varA);
+            keyTracker.setSlowmoAmount(SliderVars.varB);
         }
     }
 
