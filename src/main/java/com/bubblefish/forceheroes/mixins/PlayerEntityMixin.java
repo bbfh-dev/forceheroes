@@ -48,7 +48,7 @@ public abstract class PlayerEntityMixin extends LivingEntity implements KeyTrack
             ItemStack equippedBoots = this.getEquippedStack(EquipmentSlot.FEET);
             if (equippedHelmet.getItem() == TheFlashArmor.THE_FLASH_HELMET && equippedChestplate.getItem() == TheFlashArmor.THE_FLASH_CHESTPLATE && equippedLeggings.getItem() == TheFlashArmor.THE_FLASH_LEGGINGS && equippedBoots.getItem() == TheFlashArmor.THE_FLASH_BOOTS) {
                 if (speedForce) {
-                    this.addStatusEffect(new StatusEffectInstance(StatusEffects.SPEED, 1, (int) ((SliderVars.varA * 10 + 1) * 45), false, false, false));
+                    this.addStatusEffect(new StatusEffectInstance(StatusEffects.SPEED, 1, (int) ((speedAmount * 10 + 1) * 45), false, false, false));
                     this.addStatusEffect(new StatusEffectInstance(StatusEffects.DOLPHINS_GRACE, 1, 1, false, false, false));
                     IncreaseStepHeight.autoJumpState = 0;
                 } else {

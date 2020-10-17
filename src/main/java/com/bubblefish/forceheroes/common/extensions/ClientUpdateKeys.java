@@ -34,7 +34,7 @@ public class ClientUpdateKeys implements ClientTickEvents.EndTick {
             hasUpdated = true;
             slowMotion = !slowMotion;
 
-            if (speedForce) {
+            if (slowMotion) {
                 ClientTpsManager.changeTps((float) (20 - ((SliderVars.varB * 10 + 1) * 1.7F)));
             } else {
                 ClientTpsManager.changeTps(20F);
