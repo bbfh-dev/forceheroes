@@ -11,10 +11,14 @@ import java.io.IOException;
 public class KeyUpdatePacket {
     private boolean slowMotion;
     private boolean speedForce;
+    private double speedAmount;
+    private double slowmoAmount;
 
-    public KeyUpdatePacket(boolean slowMotion, boolean speedForce) {
+    public KeyUpdatePacket(boolean slowMotion, boolean speedForce, double speedAmount, double slowmoAmount) {
         this.slowMotion = slowMotion;
         this.speedForce = speedForce;
+        this.speedAmount = speedAmount;
+        this.slowmoAmount = slowmoAmount;
     }
 
     public KeyUpdatePacket() {
@@ -24,11 +28,15 @@ public class KeyUpdatePacket {
     public void read(PacketByteBuf buf) throws IOException {
         slowMotion = buf.readBoolean();
         speedForce = buf.readBoolean();
+        speedAmount = buf.readDouble();
+        slowmoAmount = buf.readDouble();
     }
 
     public void write(PacketByteBuf buf) throws IOException {
         buf.writeBoolean(slowMotion);
         buf.writeBoolean(speedForce);
+        buf.writeDouble(speedAmount);
+        buf.writeDouble(slowmoAmount);
     }
 
     public static void onRecieve(PacketContext packetContext, PacketByteBuf packetByteBuf) {
@@ -41,6 +49,8 @@ public class KeyUpdatePacket {
                 KeyTracker keyTracker = (KeyTracker)player;
                 keyTracker.setSlowMotion(packet.slowMotion);
                 keyTracker.setSpeedForce(packet.speedForce);
+                keyTracker.setSpeedAmount(packet.speedAmount);
+                keyTracker.setSlowmoAmount(packet.slowmoAmount);
             } else {
                 System.out.println("[ForceHeroes] Impossible situation. Player isn't implementing KeyTracker. The Mixin might not have applied or this entity isn't of type ServerPlayerEntity");
             }

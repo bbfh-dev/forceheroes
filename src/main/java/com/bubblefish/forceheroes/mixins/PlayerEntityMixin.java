@@ -25,6 +25,11 @@ public abstract class PlayerEntityMixin extends LivingEntity implements KeyTrack
     private boolean slowMotion = false;
     @Unique
     private boolean speedForce = false;
+    @Unique
+    private double speedAmount;
+    @Unique
+    private double slowmoAmount;
+
 
     protected PlayerEntityMixin(EntityType<? extends LivingEntity> entityType, World world) {
         super(entityType, world);
@@ -63,5 +68,15 @@ public abstract class PlayerEntityMixin extends LivingEntity implements KeyTrack
     @Override
     public void setSpeedForce(boolean v) {
         speedForce = v;
+    }
+
+    @Override
+    public void setSpeedAmount(double d) {
+        speedAmount = d;
+    }
+
+    @Override
+    public void setSlowmoAmount(double d) {
+        slowmoAmount = d;
     }
 }
