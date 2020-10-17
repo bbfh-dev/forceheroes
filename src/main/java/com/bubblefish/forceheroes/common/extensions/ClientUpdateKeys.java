@@ -2,6 +2,7 @@ package com.bubblefish.forceheroes.common.extensions;
 
 import com.bubblefish.forceheroes.ClientForceHeroes;
 import com.bubblefish.forceheroes.ForceHeroes;
+import com.bubblefish.forceheroes.common.mixins.SliderVars;
 import io.netty.buffer.Unpooled;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
@@ -35,6 +36,12 @@ public class ClientUpdateKeys implements ClientTickEvents.EndTick {
         if (ClientForceHeroes.keySpeedForce.wasPressed()) {
             hasUpdated = true;
             speedForce = !speedForce;
+
+            if (speedForce) {
+                ClientTpsManager.changeTps((float) (20 - ((SliderVars.varB * 10 + 1) * 1.7F)));
+            } else {
+                ClientTpsManager.changeTps(20F);
+            }
         }
 
         if (hasUpdated) {

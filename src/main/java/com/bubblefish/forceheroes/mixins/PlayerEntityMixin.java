@@ -1,6 +1,6 @@
 package com.bubblefish.forceheroes.mixins;
 
-import com.bubblefish.forceheroes.common.extensions.TpsManager;
+import com.bubblefish.forceheroes.common.extensions.ClientTpsManager;
 import com.bubblefish.forceheroes.common.mixins.KeyTracker;
 import com.bubblefish.forceheroes.common.mixins.SliderVars;
 import com.bubblefish.forceheroes.item.TheFlashArmor;
@@ -20,13 +20,13 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(PlayerEntity.class)
-public abstract class ServerPlayerEntityMixin extends LivingEntity implements KeyTracker {
+public abstract class PlayerEntityMixin extends LivingEntity implements KeyTracker {
     @Unique
     private boolean slowMotion = false;
     @Unique
     private boolean speedForce = false;
 
-    protected ServerPlayerEntityMixin(EntityType<? extends LivingEntity> entityType, World world) {
+    protected PlayerEntityMixin(EntityType<? extends LivingEntity> entityType, World world) {
         super(entityType, world);
     }
 
@@ -49,15 +49,8 @@ public abstract class ServerPlayerEntityMixin extends LivingEntity implements Ke
                 } else {
                     IncreaseStepHeight.autoJumpState = 1;
                 }
-
-                if (slowMotion) {
-                    TpsManager.changeTps((float) (20 - ((SliderVars.varB * 10 + 1) * 1.7F)));
-                } else {
-                    TpsManager.changeTps(20F);
-                }
             } else {
                 IncreaseStepHeight.autoJumpState = 1;
-                TpsManager.changeTps(20F);
             }
         } catch (AbstractMethodError ignore) {}
     }

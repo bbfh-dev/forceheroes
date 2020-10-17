@@ -2,9 +2,12 @@ package com.bubblefish.forceheroes.common.extensions;
 
 import com.bubblefish.forceheroes.mixins.MinecraftClientMixin;
 import com.bubblefish.forceheroes.mixins.RenderTickCounterMixin;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.client.MinecraftClient;
+import net.minecraft.server.MinecraftServer;
 
-public class TpsManager {
+public class ClientTpsManager {
     private static RenderTickCounterMixin rtc = null;
 
     public static void changeTps(float tps) {

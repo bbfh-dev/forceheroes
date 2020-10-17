@@ -1,11 +1,8 @@
 package com.bubblefish.forceheroes;
 
-import com.bubblefish.forceheroes.common.extensions.ClientUpdateKeys;
-import com.bubblefish.forceheroes.common.extensions.IncreaseStepHeight;
 import com.bubblefish.forceheroes.common.extensions.KeyUpdatePacket;
 import com.bubblefish.forceheroes.item.TheFlashArmor;
 import net.fabricmc.api.ModInitializer;
-import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.fabricmc.fabric.api.client.itemgroup.FabricItemGroupBuilder;
 import net.fabricmc.fabric.api.network.ServerSidePacketRegistry;
 import net.minecraft.item.ItemGroup;
