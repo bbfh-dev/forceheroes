@@ -30,15 +30,18 @@ public class ClientUpdateSpeedForce implements ClientTickEvents.EndTick {
 
         boolean hasUpdated = false;
 
-        if (ClientForceHeroes.keySlowMotion.wasPressed()) {
-            hasUpdated = true;
-            slowMotion = !slowMotion;
-
+        boolean slowmoPressed = ClientForceHeroes.keySlowMotion.wasPressed();
+        if (slowmoPressed || SliderVars.bEdited) {
             if (slowMotion) {
                 ClientTpsManager.changeTps((float) (20 - ((SliderVars.varB * 10 + 1) * 1.7F)));
             } else {
                 ClientTpsManager.changeTps(20F);
             }
+        }
+
+        if (slowmoPressed) {
+            hasUpdated = true;
+            slowMotion = !slowMotion;
         }
         if (ClientForceHeroes.keySpeedForce.wasPressed()) {
             hasUpdated = true;
