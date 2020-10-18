@@ -1,5 +1,6 @@
 package com.bubblefish.forceheroes.mixins;
 
+import com.bubblefish.forceheroes.common.extensions.ClientUpdateSpeedForce;
 import com.bubblefish.forceheroes.common.mixins.SpeedforceTracker;
 import com.bubblefish.forceheroes.item.TheFlashArmor;
 import com.bubblefish.forceheroes.common.extensions.IncreaseStepHeight;
@@ -28,7 +29,6 @@ public abstract class PlayerEntityMixin extends LivingEntity implements Speedfor
     @Unique
     private double slowmoAmount;
 
-
     protected PlayerEntityMixin(EntityType<? extends LivingEntity> entityType, World world) {
         super(entityType, world);
     }
@@ -45,6 +45,7 @@ public abstract class PlayerEntityMixin extends LivingEntity implements Speedfor
             ItemStack equippedLeggings = this.getEquippedStack(EquipmentSlot.LEGS);
             ItemStack equippedBoots = this.getEquippedStack(EquipmentSlot.FEET);
             if (equippedHelmet.getItem() == TheFlashArmor.THE_FLASH_HELMET && equippedChestplate.getItem() == TheFlashArmor.THE_FLASH_CHESTPLATE && equippedLeggings.getItem() == TheFlashArmor.THE_FLASH_LEGGINGS && equippedBoots.getItem() == TheFlashArmor.THE_FLASH_BOOTS) {
+                ClientUpdateSpeedForce.changeEquippedStatus(true);
                 if (speedForce) {
                     this.addStatusEffect(new StatusEffectInstance(StatusEffects.SPEED, 1, (int) ((speedAmount * 10 + 1) * 45), false, false, false));
                     this.addStatusEffect(new StatusEffectInstance(StatusEffects.DOLPHINS_GRACE, 1, 1, false, false, false));
@@ -54,6 +55,7 @@ public abstract class PlayerEntityMixin extends LivingEntity implements Speedfor
                 }
             } else {
                 IncreaseStepHeight.autoJumpState = 1;
+                ClientUpdateSpeedForce.changeEquippedStatus(false);
             }
         } catch (AbstractMethodError ignore) {}
     }

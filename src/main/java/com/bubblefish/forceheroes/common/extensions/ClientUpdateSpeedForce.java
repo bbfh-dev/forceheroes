@@ -17,6 +17,7 @@ import java.io.IOException;
 public class ClientUpdateSpeedForce implements ClientTickEvents.EndTick {
     public static boolean slowMotion = false;
     public static boolean speedForce = false;
+    public static boolean armorEquipped = false;
 
     @Override
     @Environment(EnvType.CLIENT)
@@ -25,6 +26,7 @@ public class ClientUpdateSpeedForce implements ClientTickEvents.EndTick {
             //we're not connected to any server. Reset the keys and do nothing
             slowMotion = false;
             speedForce = false;
+            armorEquipped = false;
             return;
         }
 
@@ -33,16 +35,21 @@ public class ClientUpdateSpeedForce implements ClientTickEvents.EndTick {
         boolean slowmoPressed = ClientForceHeroes.keySlowMotion.wasPressed();
 
         if (slowmoPressed) {
+
             hasUpdated = true;
             slowMotion = !slowMotion;
         }
 
-        if (slowmoPressed || SliderVars.bEdited) {
-            if (slowMotion) {
-                ClientTpsManager.changeTps((float) (20 - ((SliderVars.varB * 10 + 1) * 1.7F)));
-            } else {
-                ClientTpsManager.changeTps(20F);
+        if (armorEquipped) {
+            if (slowmoPressed || SliderVars.bEdited) {
+                if (slowMotion) {
+                    ClientTpsManager.changeTps((float) (20 - ((SliderVars.varB * 10 + 1) * 1.7F)));
+                } else {
+                    ClientTpsManager.changeTps(20F);
+                }
             }
+        } else {
+            ClientTpsManager.changeTps(20F);
         }
 
         if (ClientForceHeroes.keySpeedForce.wasPressed()) {
@@ -67,6 +74,10 @@ public class ClientUpdateSpeedForce implements ClientTickEvents.EndTick {
             speedforceTracker.setSpeedAmount(SliderVars.varA);
             speedforceTracker.setSlowmoAmount(SliderVars.varB);
         }
+    }
+
+    public static void changeEquippedStatus (boolean value) {
+        armorEquipped = value;
     }
 
     @Environment(EnvType.CLIENT)
