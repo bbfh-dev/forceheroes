@@ -22,7 +22,7 @@ public class InventoryScreenSliderA extends SliderWidget {
     @Override
     public void renderButton(MatrixStack matrices, int mouseX, int mouseY, float delta) {
         value = (double) Math.round(value * 10) / 10;
-        SliderVars.varA = value;
+        SliderVars.setA(value);
         MinecraftClient minecraftClient = MinecraftClient.getInstance();
         TextRenderer textRenderer = minecraftClient.textRenderer;
         minecraftClient.getTextureManager().bindTexture(WIDGETS_LOCATION);
